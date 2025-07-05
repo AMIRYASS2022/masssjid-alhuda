@@ -1,0 +1,62 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "configuracion"
+    label: "Configuración de la Mezquita"
+    files:
+      - label: "Información General"
+        name: "info-general"
+        file: "_data/mezquita.json"
+        fields:
+          - {label: "Nombre de la Mezquita", name: "nombre", widget: "string", default: "Mezquita Al-Huda"}
+          - {label: "Ubicación", name: "ubicacion", widget: "string", default: "Playa Blanca, Lanzarote"}
+          - {label: "Teléfono", name: "telefono", widget: "string", required: false}
+          - {label: "Email", name: "email", widget: "string", required: false}
+          - {label: "Descripción", name: "descripcion", widget: "text"}
+          - {label: "Imagen Principal", name: "imagen", widget: "image"}
+          
+  - name: "horarios"
+    label: "Horarios de Oración"
+    files:
+      - label: "Configuración de Horarios"
+        name: "config-horarios"
+        file: "_data/horarios.json"
+        fields:
+          - {label: "Zona Horaria", name: "timezone", widget: "select", options: ["Atlantic/Canary", "Europe/Madrid"], default: "Atlantic/Canary"}
+          - {label: "Método de Cálculo", name: "metodo", widget: "select", options: ["MWL", "ISNA", "Egypt", "Makkah", "Karachi", "Tehran", "Jafari"], default: "MWL"}
+          - {label: "Ajuste Fajr (minutos)", name: "ajuste_fajr", widget: "number", default: 0}
+          - {label: "Ajuste Dhuhr (minutos)", name: "ajuste_dhuhr", widget: "number", default: 0}
+          - {label: "Ajuste Asr (minutos)", name: "ajuste_asr", widget: "number", default: 0}
+          - {label: "Ajuste Maghrib (minutos)", name: "ajuste_maghrib", widget: "number", default: 0}
+          - {label: "Ajuste Isha (minutos)", name: "ajuste_isha", widget: "number", default: 0}
+          
+  - name: "eventos"
+    label: "Eventos y Anuncios"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Tipo", name: "tipo", widget: "select", options: ["evento", "anuncio", "khutbah", "clase"]}
+      - {label: "Descripción", name: "body", widget: "markdown"}
+      - {label: "Imagen", name: "imagen", widget: "image", required: false}
+      - {label: "Destacado", name: "destacado", widget: "boolean", default: false}
+      
+  - name: "paginas"
+    label: "Páginas del Sitio"
+    files:
+      - label: "Página Principal"
+        name: "inicio"
+        file: "_data/inicio.json"
+        fields:
+          - {label: "Título Principal", name: "titulo", widget: "string"}
+          - {label: "Subtítulo", name: "subtitulo", widget: "string"}
+          - {label: "Mensaje de Bienvenida", name: "bienvenida", widget: "markdown"}
+          - {label: "Mostrar Contador", name: "mostrar_contador", widget: "boolean", default: true}
+          - {label: "Idioma por Defecto", name: "idioma_defecto", widget: "select", options: ["es", "ar"], default: "es"}
